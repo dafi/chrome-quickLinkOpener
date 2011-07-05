@@ -1,0 +1,27 @@
+{
+  "name": "Quick Link Opener",
+  "version": "1.0",
+  "description": "Open links on pages to separated tabs using selection or user defined filters",
+  "background_page": "background.html",
+  "browser_action": {
+    "default_title": "Quick Link Opener",
+    "default_icon": "images/32.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["js/qlo.js", "js/content.js"]
+    }
+   ],
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/*", "https://*/*"
+  ],
+  "options_page": "options.html",
+   "icons": {
+      "48": "images/48.png",
+      "32": "images/32.png",
+      "16": "images/16.png"
+   }
+}
