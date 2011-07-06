@@ -49,10 +49,14 @@ if  (typeof (qlo) == 'undefined') {
             var filters = loadFilters();
 
             chrome.tabs.sendRequest(tab.id, {method: "filteredLinks", filters: filters}, function(response) {
-                var urls = response.urls;
-                for (var i = 0; i < urls.length; i++) {
-                    chrome.tabs.create({url: urls[i]});
-                }
+                // If user swicthes window while tabs are created
+                // some tabs are created on new current window
+                chrome.windows.getCurrent(function(window) {
+                    var urls = response.urls;
+                    for (var i = 0; i < urls.length; i++) {
+                        chrome.tabs.create({url: urls[i], windowId: window.id});
+                    }
+                });
             });
         });
     }
