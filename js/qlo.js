@@ -37,7 +37,6 @@ if  (typeof (qlo) == 'undefined') {
             var httpReq = new XMLHttpRequest();
             httpReq.open("GET", url, false);
             httpReq.send(null);
-            console.log('----' + httpReq.responseText);
             return JSON.parse(httpReq.responseText);
         } else {
             return [];
@@ -54,7 +53,9 @@ if  (typeof (qlo) == 'undefined') {
                 chrome.windows.getCurrent(function(window) {
                     var urls = response.urls;
                     for (var i = 0; i < urls.length; i++) {
-                        chrome.tabs.create({url: urls[i], windowId: window.id});
+                        chrome.tabs.create({url: urls[i],
+                                           windowId: window.id,
+                                           selected: false});
                     }
                 });
             });
